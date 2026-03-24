@@ -3,649 +3,1052 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kaz-Travertine — Natural Stone from Kazakhstan</title>
+<title>Kaz-Travertine — Natural Stone Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --stone: #c8b89a;
-    --stone-dark: #8b7355;
-    --stone-light: #f0e8dc;
-    --earth: #3d2b1f;
-    --cream: #faf6f0;
+    --bg: #f0ebe3;
+    --bg-dark: #3d2714;
+    --bg-medium: #d9cfc4;
+    --accent: #8b4513;
+    --accent-hover: #7a3c10;
+    --text-dark: #2c1a0e;
+    --text-medium: #5a3e2b;
+    --text-light: #f0ebe3;
+    --text-muted: #8a7060;
     --gold: #b8965a;
-    --text: #2a1f15;
-    --text-muted: #7a6855;
+    --divider: #8b4513;
+    --white: #ffffff;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: var(--cream);
-    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* ─── NAV ─── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(250,246,240,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(200,184,154,0.3);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
+    padding: 12px 40px;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(139,69,19,0.12);
   }
 
   .nav-logo img {
-    height: 44px;
+    height: 52px;
     width: auto;
+    display: block;
+    /* Logo has black background — show it in a small container */
+    background: #000;
+    border-radius: 4px;
   }
 
-  .nav-links {
+  .lang-switcher {
     display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    position: relative;
-    display: flex;
+    gap: 6px;
     align-items: center;
+  }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(139,69,19,0.3);
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-medium);
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active {
+    background: var(--text-dark);
+    color: var(--bg);
+    border-color: var(--text-dark);
+  }
+
+  .lang-btn img { width: 20px; height: 14px; object-fit: cover; border-radius: 2px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding-top: 78px;
+    background: var(--bg);
     overflow: hidden;
   }
 
-  .hero-bg {
+  /* Top row: big title (full width) */
+  .hero-title-row {
+    padding: 40px 7vw 0;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(27px, 5.2vw, 71px);
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.0;
+    white-space: nowrap;
+  }
+
+  /* Bottom row: stone strip with tagline+button left, video right */
+  .hero-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 280px;
+    position: relative;
+  }
+
+  /* The travertine stone strip — spans full width of the row */
+  .hero-stone-strip {
     position: absolute;
     inset: 0;
     background-image: url('https://static.wixstatic.com/media/60993c_8fbb4af114d04dae99d6e6959905d5fa~mv2.jpeg');
     background-size: cover;
-    background-position: center;
-    filter: brightness(0.45);
+    background-position: center 60%;
+    opacity: 0.50;
+    z-index: 0;
   }
 
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(61,43,31,0.7) 0%, rgba(61,43,31,0.2) 100%);
-  }
-
-  .hero-content {
+  .hero-bottom-left {
     position: relative;
-    z-index: 2;
-    padding: 0 8vw;
-    max-width: 900px;
+    z-index: 1;
+    padding: 36px 32px 36px 7vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 232px;
   }
 
-  .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--stone);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.3s forwards;
-  }
-
-  .hero-title {
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.05;
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.5s forwards;
-  }
-
-  .hero-title em {
-    color: var(--stone);
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
     font-style: italic;
-  }
-
-  .hero-sub {
-    font-size: 18px;
-    color: rgba(255,255,255,0.75);
-    font-style: italic;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.7s forwards;
+    font-weight: 300;
+    color: var(--text-medium);
+    line-height: 1.55;
+    white-space: nowrap;
   }
 
   .hero-btn {
     display: inline-block;
-    padding: 16px 40px;
-    border: 1px solid var(--stone);
-    color: var(--stone);
+    padding: 14px 28px;
+    background: #8a4511;
+    color: var(--bg);
     text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    transition: all 0.3s;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.9s forwards;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    transition: background 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .hero-btn:hover {
-    background: var(--stone);
-    color: var(--earth);
+  .hero-btn:hover { background: #6b3510; }
+
+  /* Buttons: To the quarry / factory / products / Get acquainted */
+  .section-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #8a4511;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    transition: background 0.3s;
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+  .section-btn:hover { background: #6b3510; }
+
+  /* Video box — right column, overlaps the strip */
+  .hero-bottom-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0 0 0;
   }
 
-  /* SECTION BASE */
-  section { padding: 100px 8vw; }
+  .hero-video-box {
+    position: relative;
+    width: 92%;
+    aspect-ratio: 16/11;
+    background: #111;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.28);
+    margin-top: -60px; /* lift up to overlap title area slightly */
+  }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
+  .hero-video-box video,
+  .hero-video-box > img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-video-logo {
+    position: absolute;
+    top: 12px; left: 12px;
+    height: 34px;
+    z-index: 3;
+    /* logo is dark on dark bg — add light filter */
+    filter: brightness(0) invert(1);
+  }
+
+  .hero-video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .play-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .play-circle:hover { background: rgba(255,255,255,0.3); }
+  .play-circle svg { width: 20px; height: 20px; fill: white; margin-left: 3px; }
+
+  /* ─── ABOUT + FOUNDERS ─── */
+  .about-founders-section {
+    background: #9e887e;
+    padding: 80px 8vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .about-founders-left {
+    background-image: url('https://static.wixstatic.com/media/60993c_8fbb4af114d04dae99d6e6959905d5fa~mv2.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding: 48px;
+    position: relative;
+  }
+
+  /* overlay so text remains readable over the texture */
+  .about-founders-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(240,235,227,0.82);
+  }
+
+  .about-founders-left > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .divider-line {
+    width: 50px;
+    height: 2px;
+    background: var(--divider);
+    margin: 14px 0 24px;
+  }
+
+  .divider-line.center { margin: 14px auto 24px; }
+
+  .section-text {
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-muted);
+    font-weight: 300;
     margin-bottom: 16px;
   }
 
-  .section-title {
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 400;
-    color: var(--earth);
-    line-height: 1.2;
-    margin-bottom: 32px;
-  }
-
-  .section-text {
-    font-size: 17px;
-    line-height: 1.85;
-    color: var(--text-muted);
-    max-width: 640px;
-  }
-
-  /* DIVIDER */
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    margin: 24px 0;
-  }
-
-  /* ABOUT */
-  .about {
-    background: #fff;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .about-img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-  }
-
-  /* FOUNDERS */
-  .founders {
-    background: var(--earth);
-    padding: 100px 8vw;
-  }
-
-  .founders .section-title { color: var(--stone-light); }
-  .founders .section-label { color: var(--stone); }
-
-  .founders-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 56px;
-  }
-
-  .founder-card {
+  .about-founders-right {
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .founder-row {
+    display: flex;
+    gap: 20px;
     align-items: flex-start;
   }
 
-  .founder-img {
-    width: 90px;
-    height: 110px;
+  .founder-row img {
+    width: 130px;
+    height: 160px;
     object-fit: cover;
     object-position: top;
     flex-shrink: 0;
-    filter: grayscale(20%);
   }
 
   .founder-quote {
-    font-size: 15px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
     font-style: italic;
-    color: var(--stone-light);
+    font-weight: 300;
+    color: rgba(240,235,227,0.88);
     line-height: 1.7;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .founder-name {
+    font-weight: 600;
     font-size: 14px;
-    font-weight: 400;
-    color: var(--stone);
-    letter-spacing: 0.05em;
+    color: var(--text-light);
+    margin-bottom: 3px;
   }
 
   .founder-role {
     font-size: 12px;
-    color: rgba(240,232,220,0.5);
-    letter-spacing: 0.08em;
-    margin-top: 4px;
+    font-style: italic;
+    color: rgba(240,235,227,0.5);
   }
 
-  /* STATS */
-  .stats {
-    background: var(--stone-light);
+  /* ─── QUARRY / FACTORY / PRODUCTS ─── */
+  .image-section {
     padding: 80px 8vw;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
     text-align: center;
   }
 
-  .stat-number {
-    font-size: 56px;
-    font-weight: 400;
-    color: var(--earth);
-    line-height: 1;
+  .image-section.bg-medium { background: var(--bg-medium); }
+  .image-section.bg-light { background: var(--bg); }
+
+  .image-section .section-heading { text-align: center; }
+
+  .img-section-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-medium);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto 36px;
   }
 
-  .stat-unit {
-    font-size: 22px;
-    color: var(--gold);
-  }
-
-  .stat-label {
-    font-size: 13px;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 12px;
-  }
-
-  /* QUARRY + FACTORY */
-  .two-col {
+  .four-images {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 32px;
   }
 
-  .two-col-block {
-    padding: 80px 6vw;
-    position: relative;
-  }
-
-  .two-col-block:first-child {
-    background: #fff;
-    border-right: 1px solid var(--stone-light);
-  }
-
-  .two-col-block:last-child {
-    background: var(--cream);
-  }
-
-  .block-images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 32px;
-  }
-
-  .block-img {
+  .four-images img {
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
+    display: block;
   }
 
-  /* PRODUCTS */
-  .products { background: var(--earth); }
-  .products .section-title { color: var(--stone-light); }
-  .products .section-label { color: var(--stone); }
-  .products .section-text { color: rgba(240,232,220,0.65); }
-
-  .products-grid {
+  .square-images {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 48px;
+    gap: 10px;
+    margin-bottom: 32px;
   }
 
-  .product-img {
+  .square-images img {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    transition: transform 0.4s;
+    display: block;
   }
 
-  .product-img:hover { transform: scale(1.03); }
-
-  /* PROJECTS */
-  .projects { background: #fff; }
+  /* ─── PROJECTS ─── */
+  .projects-section {
+    background: var(--bg);
+    padding: 80px 8vw;
+    text-align: center;
+  }
 
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 48px;
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid rgba(139,69,19,0.18);
   }
 
-  .project-item {
-    position: relative;
-    overflow: hidden;
-  }
+  .project-card { overflow: hidden; }
 
-  .project-img {
+  .project-card img {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 4/3;
     object-fit: cover;
-    transition: transform 0.5s;
+    display: block;
+    transition: transform 0.4s;
+  }
+
+  .project-card:hover img { transform: scale(1.04); }
+
+  .project-label {
+    padding: 12px 16px;
+    background: var(--bg-medium);
+    font-size: 13px;
+    color: var(--text-medium);
+    font-weight: 300;
+    text-align: center;
+  }
+
+  /* ─── RECOGNITION ─── */
+  .recognition-section {
+    background: #e8e2d8;
+    padding: 80px 8vw;
+  }
+
+  .recognition-section > h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 400;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .recognition-inner {
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
+    gap: 52px;
+    align-items: start;
+  }
+
+  .recognition-left p, .recognition-right p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-medium);
+    font-weight: 300;
+    margin-bottom: 18px;
+  }
+
+  .recognition-left p strong { color: var(--text-dark); font-weight: 600; }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .video-wrapper img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
     display: block;
   }
 
-  .project-item:hover .project-img { transform: scale(1.05); }
-
-  .project-label {
+  .play-btn {
     position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    padding: 20px 16px 16px;
-    background: linear-gradient(transparent, rgba(61,43,31,0.8));
-    color: var(--stone-light);
-    font-size: 13px;
-    letter-spacing: 0.08em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px;
+    height: 52px;
+    background: rgba(255,255,255,0.88);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 
-  /* CERT */
-  .cert { background: var(--stone-light); }
-
-  .cert-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
-    margin-top: 48px;
-  }
-
-  .cert-img {
-    width: 100%;
-    max-width: 340px;
-    box-shadow: 0 8px 40px rgba(61,43,31,0.15);
-  }
-
-  .cert-text {
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--text-muted);
-  }
-
-  .cert-text p { margin-bottom: 20px; }
-
-  .cert-badge {
+  .test-protocol-link {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    border: 1px solid var(--gold);
-    margin-top: 8px;
-    margin-bottom: 16px;
-  }
-
-  .cert-badge-icon { font-size: 20px; }
-
-  .cert-badge-text {
+    gap: 8px;
+    padding: 13px 28px;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
     font-size: 13px;
-    color: var(--earth);
-    letter-spacing: 0.05em;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-top: 8px;
   }
 
-  /* TEAM */
-  .team { background: #fff; }
+  .test-protocol-link:hover { background: var(--accent); color: var(--white); }
+
+  .recognition-right h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── CERT ─── */
+  .cert-section {
+    background: var(--bg-medium);
+    padding: 80px 8vw;
+    text-align: center;
+  }
+
+  .cert-docs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 720px;
+    margin: 40px auto 0;
+  }
+
+  .cert-doc img {
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .cert-doc-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* ─── TEAM ─── */
+  .team-section {
+    background: #e2dbd1;
+    padding: 80px 8vw;
+    text-align: center;
+  }
 
   .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-    margin-top: 56px;
+    gap: 40px;
+    max-width: 900px;
+    margin: 48px auto 0;
   }
 
   .team-card { text-align: center; }
 
-  .team-img {
-    width: 140px;
-    height: 150px;
+  .team-avatar {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    margin: 0 auto 20px;
+    margin: 0 auto 18px;
     display: block;
-    filter: grayscale(15%);
+    border: 3px solid var(--bg);
+  }
+
+  /* Kudaibergen Smailov — круг 180px (больше на 32px vs 148px стандартных) */
+  .team-avatar-lg {
+    width: 180px;
+    height: 180px;
   }
 
   .team-name {
-    font-size: 18px;
-    color: var(--earth);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-dark);
     margin-bottom: 6px;
   }
 
   .team-role {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--text-muted);
-    letter-spacing: 0.06em;
+    font-weight: 300;
+    line-height: 1.5;
     margin-bottom: 12px;
   }
 
   .team-phone {
-    font-size: 14px;
-    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-medium);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    font-weight: 400;
   }
 
-  /* CONTACT */
-  .contact {
-    background: var(--earth);
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--bg);
+    padding: 80px 8vw;
     text-align: center;
-    padding: 100px 8vw;
   }
 
-  .contact .section-label { color: var(--stone); }
-  .contact .section-title { color: var(--stone-light); margin: 0 auto 16px; max-width: 600px; }
-  .contact .divider { margin: 24px auto; }
-  .contact .section-text { color: rgba(240,232,220,0.65); margin: 0 auto 48px; text-align: center; }
-
-  .contact-details {
+  .contact-info {
     display: flex;
     justify-content: center;
-    gap: 64px;
+    gap: 60px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin: 36px 0;
   }
 
-  .contact-item { text-align: center; }
-
   .contact-item-label {
-    font-size: 10px;
-    letter-spacing: 0.3em;
+    font-size: 11px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--stone);
+    color: var(--text-muted);
     margin-bottom: 8px;
+    font-weight: 400;
   }
 
   .contact-item-value {
-    font-size: 16px;
-    color: var(--stone-light);
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 300;
   }
 
-  .contact-item-value a {
-    color: var(--stone-light);
-    text-decoration: none;
-  }
-
-  .contact-item-value a:hover { color: var(--gold); }
+  .contact-item-value a { color: var(--text-dark); text-decoration: none; }
+  .contact-item-value a:hover { color: var(--accent); }
 
   .whatsapp-btn {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 18px 48px;
+    padding: 17px 46px;
     background: #25D366;
     color: #fff;
     text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.07em;
+    font-weight: 400;
     transition: background 0.3s;
   }
 
   .whatsapp-btn:hover { background: #1da851; }
 
-  /* FOOTER */
+  /* ─── FOOTER ─── */
   footer {
-    background: #1a0f09;
-    padding: 32px 8vw;
+    background: var(--text-dark);
+    padding: 28px 8vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .footer-logo img { height: 36px; opacity: 0.7; }
+  .footer-logo img { height: 38px; opacity: 0.75; }
 
   .footer-copy {
     font-size: 12px;
-    color: rgba(200,184,154,0.4);
-    letter-spacing: 0.05em;
+    color: rgba(240,235,227,0.3);
+    letter-spacing: 0.04em;
+    font-weight: 300;
   }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 14px 24px; }
-    .nav-links { display: none; }
-    section { padding: 60px 6vw; }
-    .about { grid-template-columns: 1fr; gap: 40px; }
-    .founders-grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr; gap: 32px; }
-    .two-col { grid-template-columns: 1fr; }
-    .two-col-block:first-child { border-right: none; border-bottom: 1px solid var(--stone-light); }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-    .cert-grid { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: 1fr; }
-    .contact-details { gap: 32px; }
-    footer { flex-direction: column; gap: 16px; text-align: center; }
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav {
+      padding: 10px 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-logo img { height: 42px; }
+
+    .lang-switcher { gap: 4px; }
+    .lang-btn { padding: 5px 9px; font-size: 11px; }
+    .lang-btn img { width: 16px; height: 11px; }
+
+    .hero-title-row { padding: 28px 6vw 0; }
+    .hero-title { font-size: 36px; white-space: normal; }
+
+    .hero-bottom-row { grid-template-columns: 1fr; min-height: auto; }
+
+    .hero-bottom-left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px 6vw 20px;
+    }
+
+    .hero-bottom-right {
+      padding: 0 6vw 32px;
+      justify-content: center;
+    }
+
+    .hero-video-box {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .hero-title { font-size: 40px; }
+    .hero-tagline { font-size: 18px; }
+
+    .about-founders-section {
+      grid-template-columns: 1fr;
+      padding: 60px 6vw;
+      gap: 36px;
+    }
+
+    .about-founders-left { padding: 32px; }
+
+    .founder-row {
+      flex-direction: column;
+    }
+
+    .founder-row img { width: 100%; height: auto; aspect-ratio: 4/3; }
+
+    .image-section { padding: 60px 6vw; }
+
+    .four-images,
+    .square-images {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .projects-grid { grid-template-columns: 1fr; }
+
+    .recognition-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .video-wrapper { max-width: 260px; margin: 0 auto; }
+
+    .cert-docs { grid-template-columns: 1fr; max-width: 320px; }
+
+    .team-grid { grid-template-columns: 1fr; max-width: 320px; }
+
+    .contact-info { gap: 28px; }
+
+    footer {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+
+  /* ─── QUARRY PAGE ─── */
+  #quarry-page {
+    display: none;
+    min-height: 100vh;
+    background: var(--bg);
+  }
+
+  #quarry-page.active { display: block; }
+
+  #factory-page,
+  #products-page,
+  #projects-page {
+    display: none;
+    min-height: 100vh;
+    background: var(--bg);
+  }
+
+  #factory-page.active,
+  #products-page.active,
+  #projects-page.active { display: block; }
+
+  .main-site {
+    /* wraps all main site content */
+  }
+
+  .main-site.hidden { display: none; }
+
+  .qpage-hero {
+    background: var(--bg-dark);
+    padding: 120px 8vw 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .qpage-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 64px);
+    font-weight: 400;
+    color: var(--bg);
+    line-height: 1.1;
+  }
+
+  .qpage-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    background: transparent;
+    border: 1.5px solid rgba(240,235,227,0.5);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .qpage-back:hover {
+    background: rgba(240,235,227,0.12);
+    border-color: var(--bg);
+  }
+
+  .qpage-back svg { width: 16px; height: 16px; fill: currentColor; }
+
+  .qpage-gallery {
+    padding: 60px 8vw 80px;
+    background: var(--bg);
+  }
+
+  .qpage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .qpage-grid-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+  }
+
+  .qpage-grid-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .qpage-grid-item:hover img { transform: scale(1.05); }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .lightbox-inner img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    display: block;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    width: 48px;
+    height: 64px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .lightbox-prev { left: -60px; }
+  .lightbox-next { right: -60px; }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.22); }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  @media (max-width: 900px) {
+    .qpage-hero { flex-direction: column; align-items: flex-start; padding: 100px 6vw 40px; }
+    .qpage-grid { grid-template-columns: repeat(2, 1fr); }
+    .qpage-gallery { padding: 40px 6vw 60px; }
+    .lightbox-prev { left: -44px; }
+    .lightbox-next { right: -44px; }
+  }
+
+  /* Projects page — cards with captions */
+  .qpage-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 60px 8vw 80px;
+  }
+
+  .qpage-project-card {
+    background: var(--bg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+
+  .qpage-project-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.14); }
+
+  .qpage-project-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+
+  .qpage-project-card:hover img { transform: scale(1.04); }
+
+  .qpage-project-caption {
+    padding: 14px 16px;
+    background: var(--bg-medium);
+    font-size: 13px;
+    color: var(--text-medium);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .qpage-projects-grid { grid-template-columns: repeat(2, 1fr); padding: 40px 6vw 60px; }
+  }
+
+  @media (max-width: 500px) {
+    .qpage-projects-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
+<div class="main-site" id="main-site">
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">
-    <img src="https://static.wixstatic.com/media/60993c_3cabd01fa19943d8b4f1ec261cb35f73~mv2.png" alt="Kaz-Travertine">
+  <a href="#">
+    <div class="nav-logo">
+      <img src="logo.png" alt="Kaz-Travertine">
+    </div>
   </a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#quarry">Quarry</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="setLang('kk')">
+      <img src="https://flagcdn.com/w40/kz.png" alt="KK"> KK
+    </button>
+    <button class="lang-btn active" onclick="setLang('en')">
+      <img src="https://flagcdn.com/w40/gb.png" alt="EN"> EN
+    </button>
+    <button class="lang-btn" onclick="setLang('ru')">
+      <img src="https://flagcdn.com/w40/ru.png" alt="RU"> RU
+    </button>
+    <button class="lang-btn" onclick="setLang('zh')">
+      <img src="https://flagcdn.com/w40/cn.png" alt="ZH"> ZH
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Kazakhstan · Natural Stone</p>
-    <h1 class="hero-title">Kazakh<br><em>Travertine</em></h1>
-    <p class="hero-sub">Living stone, living architecture</p>
-    <a href="#about" class="hero-btn">Explore</a>
+  <!-- Title row — full width -->
+  <div class="hero-title-row">
+    <h1 class="hero-title" data-i18n="hero_title">Kazakh Travertine</h1>
+  </div>
+
+  <!-- Bottom row: stone strip background, tagline+button left, video right -->
+  <div class="hero-bottom-row">
+    <div class="hero-stone-strip"></div>
+
+    <!-- Left: tagline + button side by side -->
+    <div class="hero-bottom-left">
+      <p class="hero-tagline" data-i18n="hero_tagline">Living stone,<br>Living architecture</p>
+      <a href="#about" class="hero-btn" data-i18n="hero_btn">About the company</a>
+    </div>
+
+    <!-- Right: video box -->
+    <div class="hero-bottom-right">
+      <div class="hero-video-box">
+        <video autoplay muted loop playsinline>
+          <source src="video_hero.mp4" type="video/mp4">
+        </video>
+        <img class="hero-video-logo" src="logo.png" alt="Kaz-Travertin">
+        <!-- autoplay video, no play button needed -->
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div>
-    <p class="section-label">About the company</p>
-    <h2 class="section-title">Kaz-Travertine LLP</h2>
-    <div class="divider"></div>
-    <p class="section-text">
-      Kaz-Travertine LLP is a Central Asian manufacturing company specializing in the extraction and processing of natural travertine. Combining the region's natural resources, modern technology, and professional expertise, the company produces high-quality natural stone products for architecture and construction.
-    </p>
-    <br>
-    <p class="section-text">
-      The company is focused on developing Kazakhstan's export potential and promoting the region's natural stone on the international market.
-    </p>
+<!-- ABOUT + FOUNDERS -->
+<section class="about-founders-section" id="about">
+  <div class="about-founders-left">
+    <h2 class="section-heading" data-i18n="about_title">About Kaz-Travertine LLP</h2>
+    <div class="divider-line"></div>
+    <p class="section-text" data-i18n="about_p1">Kaz-Travertine LLP is a Central Asian manufacturing company specializing in the extraction and processing of natural travertine. Combining the region's natural resources, modern technology, and professional expertise, the company produces high-quality natural stone products for architecture and construction.</p>
+    <p class="section-text" data-i18n="about_p2">Kaz-Travertine natural stone is distinguished by its strength, natural expressiveness, and durability, making it widely used in building cladding, architectural elements, and design projects.</p>
+    <p class="section-text" data-i18n="about_p3">The company is focused on developing Kazakhstan's export potential and promoting the region's natural stone on the international market.</p>
   </div>
-  <img class="about-img"
-    src="https://static.wixstatic.com/media/60993c_804b6ac7eddc42ad939cfc02845ee1c0~mv2.jpeg"
-    alt="Travertine quarry">
-</section>
-
-<!-- STATS -->
-<div class="stats">
-  <div>
-    <div class="stat-number">1<span class="stat-unit">M+</span></div>
-    <div class="stat-label">m³ of reserves</div>
-  </div>
-  <div>
-    <div class="stat-number">2<span class="stat-unit"></span></div>
-    <div class="stat-label">Mining sites: Degeres-1 & Degeres-3</div>
-  </div>
-  <div>
-    <div class="stat-number">100<span class="stat-unit">%</span></div>
-    <div class="stat-label">Natural & certified stone</div>
-  </div>
-</div>
-
-<!-- FOUNDERS -->
-<section class="founders">
-  <p class="section-label">Leadership</p>
-  <h2 class="section-title">Founders</h2>
-  <div class="founders-grid">
-    <div class="founder-card">
-      <img class="founder-img"
-        src="https://static.wixstatic.com/media/60993c_3672ce868e204855b0b22a1246437b0e~mv2.jpeg"
-        alt="Zharas Ertaev">
+  <div class="about-founders-right">
+    <div class="founder-row">
+      <img src="https://static.wixstatic.com/media/60993c_3672ce868e204855b0b22a1246437b0e~mv2.jpeg" alt="Zharas Ertaev">
       <div>
         <p class="founder-quote">"Natural stone is the foundation of durable architecture. We strive to unlock the potential of Kazakhstani travertine for contemporary projects."</p>
         <p class="founder-name">Zharas Ertaev</p>
         <p class="founder-role">Founder of Kaz-Travertine LLP</p>
       </div>
     </div>
-    <div class="founder-card">
-      <img class="founder-img"
-        src="https://static.wixstatic.com/media/60993c_907c26ac360447aba041ed33910fa678~mv2.jpeg"
-        alt="Bekasyl Tolendiev">
-      <div>
-        <p class="founder-quote">"We combine Kazakhstan's rich natural resources with modern processing technology to deliver exceptional quality stone for global projects."</p>
+    <div class="founder-row">
+      <img src="https://static.wixstatic.com/media/60993c_907c26ac360447aba041ed33910fa678~mv2.jpeg" alt="Bekasyl Tolendiev">
+      <div style="margin-top: 103px;">
         <p class="founder-name">Bekasyl Tolendiev</p>
         <p class="founder-role">Co-Founder of Kaz-Travertine LLP</p>
       </div>
@@ -653,162 +1056,182 @@
   </div>
 </section>
 
-<!-- QUARRY + FACTORY -->
-<div class="two-col">
-  <div class="two-col-block" id="quarry">
-    <p class="section-label">Infrastructure</p>
-    <h3 class="section-title" style="font-size:32px;">Own Quarry</h3>
-    <div class="divider"></div>
-    <p class="section-text">
-      Kaz-Travertine is developing a natural travertine deposit in Kazakhstan. Mining is taking place at the Degeres-1 and Degeres-3 sites. The deposit's total reserves amount to over 1,300,000 m³ of natural stone, ensuring stable long-term supplies.
-    </p>
-    <div class="block-images">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_804b6ac7eddc42ad939cfc02845ee1c0~mv2.jpeg" alt="Quarry">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_a299308babc04bb9a87971e492296d17~mv2.jpg" alt="Quarry">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_86d9d4d3b8be439b848e1ba11e255b6f~mv2.jpg" alt="Quarry site">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_f85c1934e63a4729b1af70a27cd9ac37~mv2.jpg" alt="Stone blocks">
-    </div>
+<!-- QUARRY -->
+<section class="image-section bg-medium" id="quarry">
+  <h2 class="section-heading">Own quarry</h2>
+  <div class="divider-line center"></div>
+  <p class="img-section-text">
+    Kaz-Travertine is developing a natural travertine deposit in Kazakhstan. Mining is taking place at the Degeres-1 and Degeres-3 sites.<br>
+    The deposit's total reserves amount to over 1,300,000 m³ of natural stone, ensuring stable long-term supplies for construction and architectural projects.
+  </p>
+  <div class="four-images">
+    <img src="https://static.wixstatic.com/media/60993c_804b6ac7eddc42ad939cfc02845ee1c0~mv2.jpeg" alt="Quarry 1">
+    <img src="https://static.wixstatic.com/media/60993c_a299308babc04bb9a87971e492296d17~mv2.jpg" alt="Quarry 2">
+    <img src="https://static.wixstatic.com/media/60993c_86d9d4d3b8be439b848e1ba11e255b6f~mv2.jpg" alt="Quarry 3">
+    <img src="https://static.wixstatic.com/media/60993c_f85c1934e63a4729b1af70a27cd9ac37~mv2.jpg" alt="Quarry 4">
   </div>
-  <div class="two-col-block">
-    <p class="section-label">Infrastructure</p>
-    <h3 class="section-title" style="font-size:32px;">Own Factory</h3>
-    <div class="divider"></div>
-    <p class="section-text">
-      Kaz-Travertine processes natural travertine using modern stone processing equipment. Our production facilities enable us to manufacture blocks, slabs, plates, and facing tiles in various formats for architectural and construction projects.
-    </p>
-    <div class="block-images">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_8637fbbbd7cd4032845eee426416c562~mv2.jpg" alt="Factory">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_80e4f8582cdf4de4821acb58b642cd31~mv2.jpg" alt="Processing">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_323d47c41dcc4428bc541b1402d4eb70~mv2.jpg" alt="Factory floor">
-      <img class="block-img" src="https://static.wixstatic.com/media/60993c_1a88aee54b1a41a98ea90b7f6389e940~mv2.jpg" alt="Equipment">
-    </div>
+  <a href="#" class="section-btn" onclick="openQuarryPage(event)">To the quarry</a>
+</section>
+
+<!-- FACTORY -->
+<section class="image-section bg-light">
+  <h2 class="section-heading">Own factory</h2>
+  <div class="divider-line center"></div>
+  <p class="img-section-text">
+    Kaz-Travertine processes natural travertine using modern stone processing equipment.<br>
+    Our production facilities enable us to manufacture blocks, slabs, plates, and facing tiles in various formats for architectural and construction projects.
+  </p>
+  <div class="four-images">
+    <img src="https://static.wixstatic.com/media/60993c_8637fbbbd7cd4032845eee426416c562~mv2.jpg" alt="Factory 1">
+    <img src="https://static.wixstatic.com/media/60993c_80e4f8582cdf4de4821acb58b642cd31~mv2.jpg" alt="Factory 2">
+    <img src="https://static.wixstatic.com/media/60993c_323d47c41dcc4428bc541b1402d4eb70~mv2.jpg" alt="Factory 3">
+    <img src="https://static.wixstatic.com/media/60993c_1a88aee54b1a41a98ea90b7f6389e940~mv2.jpg" alt="Factory 4">
   </div>
-</div>
+  <a href="#" class="section-btn" onclick="openFactoryPage(event)">To the factory</a>
+</section>
 
 <!-- PRODUCTS -->
-<section class="products" id="products">
-  <p class="section-label">What we offer</p>
-  <h2 class="section-title" style="color:var(--stone-light);">Our Products</h2>
-  <div class="divider"></div>
-  <p class="section-text">
-    Kaz-Travertine produces natural travertine products for architectural and construction projects. The range includes blocks, slabs and facing tiles in various formats and types of surface treatment.
+<section class="image-section bg-medium" id="products">
+  <h2 class="section-heading">Our products</h2>
+  <div class="divider-line center"></div>
+  <p class="img-section-text">
+    Kaz-Travertine produces natural travertine products for architectural and construction projects.<br>
+    The range includes blocks, slabs and facing tiles in various formats and types of surface treatment.
   </p>
-  <div class="products-grid">
-    <img class="product-img" src="https://static.wixstatic.com/media/60993c_6881f66ae21d470f91f19c961792a9b8~mv2.jpg" alt="Product 1">
-    <img class="product-img" src="https://static.wixstatic.com/media/60993c_e6f1459a16cc4508a50a15fc6c96fbc4~mv2.jpg" alt="Product 2">
-    <img class="product-img" src="https://static.wixstatic.com/media/60993c_1e4cfb18f82c48cba05ea01323afe248~mv2.jpg" alt="Product 3">
-    <img class="product-img" src="https://static.wixstatic.com/media/60993c_67597253033c42818873c19908f6839b~mv2.jpg" alt="Product 4">
+  <div class="square-images">
+    <img src="https://static.wixstatic.com/media/60993c_6881f66ae21d470f91f19c961792a9b8~mv2.jpg" alt="Product 1">
+    <img src="https://static.wixstatic.com/media/60993c_e6f1459a16cc4508a50a15fc6c96fbc4~mv2.jpg" alt="Product 2">
+    <img src="https://static.wixstatic.com/media/60993c_1e4cfb18f82c48cba05ea01323afe248~mv2.jpg" alt="Product 3">
+    <img src="https://static.wixstatic.com/media/60993c_67597253033c42818873c19908f6839b~mv2.jpg" alt="Product 4">
   </div>
+  <a href="#" class="section-btn" onclick="openProductsPage(event)">To our products</a>
 </section>
 
 <!-- PROJECTS -->
-<section class="projects">
-  <p class="section-label">Portfolio</p>
-  <h2 class="section-title">Our Projects</h2>
-  <div class="divider"></div>
+<section class="projects-section">
+  <h2 class="section-heading">Our projects</h2>
+  <div class="divider-line center"></div>
   <div class="projects-grid">
-    <div class="project-item">
-      <img class="project-img" src="https://static.wixstatic.com/media/60993c_668754bcdb34476792c97a3e98ab191e~mv2.jpg" alt="Gallery with columns">
+    <div class="project-card">
+      <img src="https://static.wixstatic.com/media/60993c_668754bcdb34476792c97a3e98ab191e~mv2.jpg" alt="Gallery with columns">
       <div class="project-label">Gallery with columns</div>
     </div>
-    <div class="project-item">
-      <img class="project-img" src="https://static.wixstatic.com/media/60993c_10f63074a7e54ccda30fcacb4ed6c00c~mv2.jpg" alt="Travertine staircase">
+    <div class="project-card">
+      <img src="https://static.wixstatic.com/media/60993c_10f63074a7e54ccda30fcacb4ed6c00c~mv2.jpg" alt="Travertine staircase">
       <div class="project-label">Travertine staircase</div>
     </div>
-    <div class="project-item">
-      <img class="project-img" src="https://static.wixstatic.com/media/60993c_449757667cb5427ca4658d952a24b205~mv2.jpg" alt="Garden border">
+    <div class="project-card">
+      <img src="https://static.wixstatic.com/media/60993c_449757667cb5427ca4658d952a24b205~mv2.jpg" alt="Garden border">
       <div class="project-label">Garden border</div>
     </div>
+  </div>
+  <a href="#" class="section-btn" onclick="openProjectsPage(event)">Get acquainted</a>
+</section>
+
+<!-- RECOGNITION -->
+<section class="recognition-section">
+  <h2>Recognition from industry professionals</h2>
+  <div class="recognition-inner">
+    <div class="recognition-left">
+      <p>Kaz-Travertine's natural travertine has undergone laboratory testing, confirming its excellent physical and mechanical properties, environmental friendliness, and biological neutrality. The stone is safe for use in construction and architecture and is highly frost-resistant, successfully withstanding freeze-thaw cycles.</p>
+      <p>Further confirmation of the quality of our stone is our collaboration with the <strong>Russian stone processing company Kamen Stroy Expert LLC (USSA-gran)</strong>, a manufacturing company specializing in the processing of natural stone and the implementation of architectural projects of varying complexity.</p>
+      <p>The company's specialists, who have extensive experience working with natural stone, highly praised Kaz-Travertine travertine, noting its distinctive natural structure, stable physical and mechanical properties, and suitability for use in architectural and construction projects.</p>
+    </div>
+    <div>
+      <div class="video-wrapper">
+        <video controls playsinline style="width:100%; display:block; aspect-ratio:9/16; object-fit:cover;">
+          <source src="video_recognition.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="recognition-right">
+      <h3>Natural &amp; Environmentally Safe Stone</h3>
+      <p>Travertine is a natural stone formed through natural geological processes. The material is environmentally friendly, biologically neutral, and safe for humans.</p>
+      <p>The stone does not emit harmful substances and does not promote the growth of bacteria and fungi, and its porous structure ensures natural micro-ventilation of the surface and helps maintain a favorable microclimate in the premises.</p>
+      <p>Its environmental safety and durability make travertine a sought-after material in modern architecture and construction.</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: -60px;">
+    <a href="Сертификат_Москва.pdf" download class="test-protocol-link">Test protocol &rsaquo;</a>
   </div>
 </section>
 
 <!-- CERTIFICATE -->
-<section class="cert">
-  <p class="section-label">Quality assurance</p>
-  <h2 class="section-title">Certified & Tested</h2>
-  <div class="divider"></div>
-  <div class="cert-grid">
-    <div>
-      <img class="cert-img" src="https://static.wixstatic.com/media/60993c_502bb139c4c14d888e053f5762d597d0~mv2.jpg" alt="Certificate">
+<section class="cert-section">
+  <h2 class="section-heading">Certificate</h2>
+  <div class="divider-line center"></div>
+  <div class="cert-docs">
+    <div class="cert-doc">
+      <img src="https://static.wixstatic.com/media/60993c_502bb139c4c14d888e053f5762d597d0~mv2.jpg" alt="Certificate KZ">
+      <p class="cert-doc-label">Certificate Kaz</p>
     </div>
-    <div class="cert-text">
-      <div class="cert-badge">
-        <span class="cert-badge-icon">🌿</span>
-        <span class="cert-badge-text">Natural & Environmentally Safe Stone</span>
-      </div>
-      <div class="cert-badge">
-        <span class="cert-badge-icon">❄️</span>
-        <span class="cert-badge-text">High Frost Resistance — Certified</span>
-      </div>
-      <div class="cert-badge">
-        <span class="cert-badge-icon">🏗️</span>
-        <span class="cert-badge-text">Laboratory Tested Physical Properties</span>
-      </div>
-      <br>
-      <p>Kaz-Travertine's natural travertine has undergone laboratory testing, confirming its excellent physical and mechanical properties, environmental friendliness, and biological neutrality.</p>
-      <br>
-      <p>The stone is safe for use in construction and architecture and is highly frost-resistant, successfully withstanding freeze-thaw cycles.</p>
-      <br>
-      <p>Further confirmation of quality is our collaboration with Kamen Stroy Expert LLC (USSA-gran) — a Russian stone processing company specializing in natural stone and complex architectural projects.</p>
+    <div class="cert-doc">
+      <img src="https://static.wixstatic.com/media/60993c_502bb139c4c14d888e053f5762d597d0~mv2.jpg" alt="Certificate RU">
+      <p class="cert-doc-label">Certificate Ru</p>
     </div>
   </div>
 </section>
 
 <!-- TEAM -->
-<section class="team" id="team">
-  <p class="section-label">Our people</p>
-  <h2 class="section-title">Our Team</h2>
-  <div class="divider"></div>
+<section class="team-section" id="team">
+  <h2 class="section-heading">Our team</h2>
+  <div class="divider-line center"></div>
   <div class="team-grid">
     <div class="team-card">
-      <img class="team-img"
+      <img class="team-avatar"
         src="https://static.wixstatic.com/media/60993c_56731f44a5994a5fbfd4198ccfec8458~mv2.jpeg"
         alt="Madi Ualikhanov">
       <p class="team-name">Madi Ualikhanov</p>
-      <p class="team-role">Company Lawyer</p>
-      <a class="team-phone" href="tel:+77713724947">+7-771-372-49-47</a>
+      <p class="team-role">Company lawyer<br>Kaz-Travertine LLP</p>
+      <a class="team-phone" href="https://wa.me/77713724947">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +7-771-372-49-47
+      </a>
     </div>
     <div class="team-card">
-      <img class="team-img"
+      <img class="team-avatar team-avatar-lg"
         src="https://static.wixstatic.com/media/60993c_8bf026ce11204e27882f562a2aa32591~mv2.jpeg"
         alt="Kudaibergen Smailov">
       <p class="team-name">Kudaibergen Smailov</p>
-      <p class="team-role">Director</p>
-      <a class="team-phone" href="tel:+77717747980">+7-771-774-79-80</a>
+      <p class="team-role">Director of Kaz-Travertine LLP</p>
+      <a class="team-phone" href="https://wa.me/77717747980">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +7-771-774-79-80
+      </a>
     </div>
     <div class="team-card">
-      <img class="team-img"
+      <img class="team-avatar"
         src="https://static.wixstatic.com/media/60993c_50017d53c5f541619fcb802912dad6c6~mv2.jpeg"
         alt="Bakytzhan Berdibekov">
       <p class="team-name">Bakytzhan Berdibekov</p>
-      <p class="team-role">Commercial Director</p>
-      <a class="team-phone" href="tel:+77014920303">+7-701-492-03-03</a>
+      <p class="team-role">Commercial Director of Kaz-Travertine LLP</p>
+      <a class="team-phone" href="https://wa.me/77014920303">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +7-701-492-03-03
+      </a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
-  <p class="section-label">Get in touch</p>
-  <h2 class="section-title">Contact Us</h2>
-  <div class="divider"></div>
-  <p class="section-text">Contact us to explore our premium natural stone offerings.</p>
-
-  <div class="contact-details">
-    <div class="contact-item">
+<section class="contact-section" id="contact">
+  <h2 class="section-heading" style="text-align:center;">Contact Us</h2>
+  <div class="divider-line center"></div>
+  <p class="section-text" style="text-align:center;max-width:460px;margin:0 auto;">Contact us to explore our premium natural stone offerings.</p>
+  <div class="contact-info">
+    <div>
       <p class="contact-item-label">Phone</p>
       <p class="contact-item-value"><a href="tel:+77014920303">+7 701 492 0303</a></p>
     </div>
-    <div class="contact-item">
+    <div>
       <p class="contact-item-label">Email</p>
       <p class="contact-item-value"><a href="mailto:kaz-travertin@mail.ru">kaz-travertin@mail.ru</a></p>
     </div>
-    <div class="contact-item">
+    <div>
       <p class="contact-item-label">Address</p>
       <p class="contact-item-value">Shymkent, Kazakhstan<br>Kapal Batyra st., 5 km, 94</p>
     </div>
   </div>
-
   <a class="whatsapp-btn" href="https://wa.me/77014920303" target="_blank">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Write on WhatsApp
@@ -818,10 +1241,734 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="Kaz-Travertine">
+    <img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="logo">
   </div>
   <p class="footer-copy">© 2026 Kaz-Travertine LLP · Republic of Kazakhstan</p>
 </footer>
 
+</div><!-- /main-site -->
+
+<!-- ═══════════ QUARRY PAGE ═══════════ -->
+<div id="quarry-page">
+
+  <!-- Sticky nav with back button -->
+  <nav>
+    <a href="#" onclick="closeSubPage('quarry-page', event)">
+      <div class="nav-logo">
+        <img src="logo.png" alt="Kaz-Travertine">
+      </div>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('kk')">
+        <img src="https://flagcdn.com/w40/kz.png" alt="KK"> KK
+      </button>
+      <button class="lang-btn active" onclick="setLang('en')">
+        <img src="https://flagcdn.com/w40/gb.png" alt="EN"> EN
+      </button>
+      <button class="lang-btn" onclick="setLang('ru')">
+        <img src="https://flagcdn.com/w40/ru.png" alt="RU"> RU
+      </button>
+      <button class="lang-btn" onclick="setLang('zh')">
+        <img src="https://flagcdn.com/w40/cn.png" alt="ZH"> ZH
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero banner -->
+  <div class="qpage-hero">
+    <h1>Own quarry</h1>
+    <a href="#" class="qpage-back" onclick="closeSubPage('quarry-page', event)">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to main
+    </a>
+  </div>
+
+  <!-- Photo gallery -->
+  <div class="qpage-gallery">
+    <div class="qpage-grid" id="quarryGrid">
+      <div class="qpage-grid-item" onclick="openLightbox(0)">
+        <img src="https://static.wixstatic.com/media/60993c_44d064c63c574f65831c9d1fd8fa83c8~mv2.jpg" alt="Quarry 1">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(1)">
+        <img src="https://static.wixstatic.com/media/60993c_f650ff472b7b44dea19184bd8e8c6a3e~mv2.jpg" alt="Quarry 2">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(2)">
+        <img src="https://static.wixstatic.com/media/60993c_e93be05ffe334a3b967469430441d130~mv2.jpg" alt="Quarry 3">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(3)">
+        <img src="https://static.wixstatic.com/media/60993c_e5a57ad2631643588b30c75ddebae2fc~mv2.jpg" alt="Quarry 4">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(4)">
+        <img src="https://static.wixstatic.com/media/60993c_39c606b75a484a03a3e70cc96968eb74~mv2.jpg" alt="Quarry 5">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(5)">
+        <img src="https://static.wixstatic.com/media/60993c_86d9d4d3b8be439b848e1ba11e255b6f~mv2.jpg" alt="Quarry 6">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(6)">
+        <img src="https://static.wixstatic.com/media/60993c_2e74310a42604dc2ab3e3e50305871d2~mv2.jpg" alt="Quarry 7">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(7)">
+        <img src="https://static.wixstatic.com/media/60993c_c37ac8a0ca8f4e48891935e6d4d5f56e~mv2.jpeg" alt="Quarry 8">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(8)">
+        <img src="https://static.wixstatic.com/media/60993c_64833af7396e459ba87f56bb3b8b89bb~mv2.jpg" alt="Quarry 9">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(9)">
+        <img src="https://static.wixstatic.com/media/60993c_a299308babc04bb9a87971e492296d17~mv2.jpg" alt="Quarry 10">
+      </div>
+      <div class="qpage-grid-item" onclick="openLightbox(10)">
+        <img src="https://static.wixstatic.com/media/60993c_804b6ac7eddc42ad939cfc02845ee1c0~mv2.jpeg" alt="Quarry 11">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="logo">
+    </div>
+    <p class="footer-copy">© 2026 Kaz-Travertine LLP · Republic of Kazakhstan</p>
+  </footer>
+
+</div><!-- /quarry-page -->
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+</div>
+
+<!-- ═══════════ FACTORY PAGE ═══════════ -->
+<div id="factory-page">
+  <nav>
+    <a href="#" onclick="closeSubPage('factory-page', event)">
+      <div class="nav-logo"><img src="logo.png" alt="Kaz-Travertine"></div>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('kk')"><img src="https://flagcdn.com/w40/kz.png" alt="KK"> KK</button>
+      <button class="lang-btn active" onclick="setLang('en')"><img src="https://flagcdn.com/w40/gb.png" alt="EN"> EN</button>
+      <button class="lang-btn" onclick="setLang('ru')"><img src="https://flagcdn.com/w40/ru.png" alt="RU"> RU</button>
+      <button class="lang-btn" onclick="setLang('zh')"><img src="https://flagcdn.com/w40/cn.png" alt="ZH"> ZH</button>
+    </div>
+  </nav>
+  <div class="qpage-hero">
+    <h1>Own factory</h1>
+    <a href="#" class="qpage-back" onclick="closeSubPage('factory-page', event)">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to main
+    </a>
+  </div>
+  <div class="qpage-gallery">
+    <div class="qpage-grid" id="factoryGrid">
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',0)"><img src="https://static.wixstatic.com/media/60993c_70dd3a9e80a14ae4a72fea000cebf707~mv2.jpeg" alt="Factory 1"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',1)"><img src="https://static.wixstatic.com/media/60993c_4e110c862f624b6f87b57959a3994716~mv2.jpeg" alt="Factory 2"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',2)"><img src="https://static.wixstatic.com/media/60993c_de3d96f2816f4e00b78bb5ddf5db97c1~mv2.jpeg" alt="Factory 3"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',3)"><img src="https://static.wixstatic.com/media/60993c_4b9c560a16aa4491aee2d47238613d15~mv2.jpeg" alt="Factory 4"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',4)"><img src="https://static.wixstatic.com/media/60993c_e3e2b754f3d64d29b66897c26100bf98~mv2.jpeg" alt="Factory 5"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',5)"><img src="https://static.wixstatic.com/media/60993c_84ae56f15c73408b9ce014f14d44487b~mv2.jpeg" alt="Factory 6"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',6)"><img src="https://static.wixstatic.com/media/60993c_e000d7f04e434b7cafddfb9072f21c9d~mv2.jpeg" alt="Factory 7"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',7)"><img src="https://static.wixstatic.com/media/60993c_6163dedae7134072b1411f60cd7497c7~mv2.jpeg" alt="Factory 8"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',8)"><img src="https://static.wixstatic.com/media/60993c_7ea3f0b0526843f9a5677dfb789045f4~mv2.jpeg" alt="Factory 9"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',9)"><img src="https://static.wixstatic.com/media/60993c_dd6163d74364451ba343173271d2994a~mv2.jpeg" alt="Factory 10"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',10)"><img src="https://static.wixstatic.com/media/60993c_b009056a6d0d420887341f772fd44cd5~mv2.jpeg" alt="Factory 11"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',11)"><img src="https://static.wixstatic.com/media/60993c_d8c6983d48be4a40af8be35d17cd1dd2~mv2.jpeg" alt="Factory 12"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',12)"><img src="https://static.wixstatic.com/media/60993c_ecad21fc4dcd4e5288cf7003296c3b60~mv2.jpeg" alt="Factory 13"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',13)"><img src="https://static.wixstatic.com/media/60993c_19288ea9c4e749d7b077233185714836~mv2.jpeg" alt="Factory 14"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',14)"><img src="https://static.wixstatic.com/media/60993c_b7c70551f55f4064b7fb582d1bcf4c5e~mv2.jpeg" alt="Factory 15"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',15)"><img src="https://static.wixstatic.com/media/60993c_e3da9f8d3ab04ae7b1c3fe68e93834c2~mv2.jpeg" alt="Factory 16"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',16)"><img src="https://static.wixstatic.com/media/60993c_f0ec73a94eac4441828c094dcb89bfd0~mv2.jpeg" alt="Factory 17"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',17)"><img src="https://static.wixstatic.com/media/60993c_3bc739c2c8f34575957d592d9a44504f~mv2.jpeg" alt="Factory 18"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',18)"><img src="https://static.wixstatic.com/media/60993c_bffcf2a5327549d4a48763a4343be829~mv2.jpeg" alt="Factory 19"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('factory',19)"><img src="https://static.wixstatic.com/media/60993c_1c901c66b15d43c8b863d92642899e4b~mv2.jpeg" alt="Factory 20"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo"><img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="logo"></div>
+    <p class="footer-copy">© 2026 Kaz-Travertine LLP · Republic of Kazakhstan</p>
+  </footer>
+</div><!-- /factory-page -->
+
+<!-- ═══════════ PRODUCTS PAGE ═══════════ -->
+<div id="products-page">
+  <nav>
+    <a href="#" onclick="closeSubPage('products-page', event)">
+      <div class="nav-logo"><img src="logo.png" alt="Kaz-Travertine"></div>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('kk')"><img src="https://flagcdn.com/w40/kz.png" alt="KK"> KK</button>
+      <button class="lang-btn active" onclick="setLang('en')"><img src="https://flagcdn.com/w40/gb.png" alt="EN"> EN</button>
+      <button class="lang-btn" onclick="setLang('ru')"><img src="https://flagcdn.com/w40/ru.png" alt="RU"> RU</button>
+      <button class="lang-btn" onclick="setLang('zh')"><img src="https://flagcdn.com/w40/cn.png" alt="ZH"> ZH</button>
+    </div>
+  </nav>
+  <div class="qpage-hero">
+    <h1>Own products</h1>
+    <a href="#" class="qpage-back" onclick="closeSubPage('products-page', event)">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to main
+    </a>
+  </div>
+  <div class="qpage-gallery">
+    <div class="qpage-grid" id="productsGrid">
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',0)"><img src="https://static.wixstatic.com/media/60993c_84ea31498fd7445b89e29934d6882dbd~mv2.jpg" alt="Product 1"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',1)"><img src="https://static.wixstatic.com/media/60993c_0ea4ddc72fad43099e8d6dd4e81ede51~mv2.jpeg" alt="Product 2"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',2)"><img src="https://static.wixstatic.com/media/60993c_a6739702e9a14ff59d93f43da778a360~mv2.jpeg" alt="Product 3"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',3)"><img src="https://static.wixstatic.com/media/60993c_ec2f8305660141ff96b1e5f64e13da5f~mv2.jpeg" alt="Product 4"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',4)"><img src="https://static.wixstatic.com/media/60993c_6881f66ae21d470f91f19c961792a9b8~mv2.jpg" alt="Product 5"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',5)"><img src="https://static.wixstatic.com/media/60993c_a213ac286d874fbd83edb207327387aa~mv2.jpeg" alt="Product 6"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',6)"><img src="https://static.wixstatic.com/media/60993c_67597253033c42818873c19908f6839b~mv2.jpg" alt="Product 7"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',7)"><img src="https://static.wixstatic.com/media/60993c_1e4cfb18f82c48cba05ea01323afe248~mv2.jpg" alt="Product 8"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',8)"><img src="https://static.wixstatic.com/media/60993c_f247c358a4bc4895bbceef20ea362c67~mv2.jpg" alt="Product 9"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',9)"><img src="https://static.wixstatic.com/media/60993c_f03904f94a9c467fb93cf5c46f710053~mv2.jpg" alt="Product 10"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',10)"><img src="https://static.wixstatic.com/media/60993c_258e12a3c84d4f80bfd7fcb8080dd899~mv2.jpeg" alt="Product 11"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',11)"><img src="https://static.wixstatic.com/media/60993c_f7240a06a74e4812bfb5e79477ceb262~mv2.jpeg" alt="Product 12"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',12)"><img src="https://static.wixstatic.com/media/60993c_332311f079124bf0b06cb49bffce3462~mv2.jpeg" alt="Product 13"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',13)"><img src="https://static.wixstatic.com/media/60993c_4a9413067200460ea593fc586066c85f~mv2.jpeg" alt="Product 14"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',14)"><img src="https://static.wixstatic.com/media/60993c_10794b21b1d041de8340a5d8551f304f~mv2.jpeg" alt="Product 15"></div>
+      <div class="qpage-grid-item" onclick="openLightboxFor('products',15)"><img src="https://static.wixstatic.com/media/60993c_e17bc9621aa44cffae3e3528098307cf~mv2.jpeg" alt="Product 16"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo"><img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="logo"></div>
+    <p class="footer-copy">© 2026 Kaz-Travertine LLP · Republic of Kazakhstan</p>
+  </footer>
+</div><!-- /products-page -->
+
+<!-- ═══════════ PROJECTS PAGE ═══════════ -->
+<div id="projects-page">
+  <nav>
+    <a href="#" onclick="closeSubPage('projects-page', event)">
+      <div class="nav-logo"><img src="logo.png" alt="Kaz-Travertine"></div>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('kk')"><img src="https://flagcdn.com/w40/kz.png" alt="KK"> KK</button>
+      <button class="lang-btn active" onclick="setLang('en')"><img src="https://flagcdn.com/w40/gb.png" alt="EN"> EN</button>
+      <button class="lang-btn" onclick="setLang('ru')"><img src="https://flagcdn.com/w40/ru.png" alt="RU"> RU</button>
+      <button class="lang-btn" onclick="setLang('zh')"><img src="https://flagcdn.com/w40/cn.png" alt="ZH"> ZH</button>
+    </div>
+  </nav>
+  <div class="qpage-hero">
+    <h1>Our projects</h1>
+    <a href="#" class="qpage-back" onclick="closeSubPage('projects-page', event)">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to main
+    </a>
+  </div>
+  <div class="qpage-projects-grid">
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',0)">
+      <img src="https://static.wixstatic.com/media/60993c_793e6e5a1c274b3598ea6449dc5deadd~mv2.jpg" alt="Project 1">
+      <div class="qpage-project-caption">Travertine staircase. Classical entrance architecture</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',1)">
+      <img src="https://static.wixstatic.com/media/60993c_659fb83489a14761b82a8416030e824c~mv2.jpg" alt="Project 2">
+      <div class="qpage-project-caption">Gallery with columns made of natural travertine</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',2)">
+      <img src="https://static.wixstatic.com/media/60993c_7e11180ca19348589d8c5fd57dac6e5c~mv2.jpg" alt="Project 3">
+      <div class="qpage-project-caption">The building's facade is clad in beige travertine</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',3)">
+      <img src="https://static.wixstatic.com/media/60993c_449757667cb5427ca4658d952a24b205~mv2.jpg" alt="Project 4">
+      <div class="qpage-project-caption">Travertine garden border</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',4)">
+      <img src="https://static.wixstatic.com/media/60993c_7a356b58c37944a1b30be053f91cdbae~mv2.jpg" alt="Project 5">
+      <div class="qpage-project-caption">Facade made of natural travertine with arched elements</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',5)">
+      <img src="https://static.wixstatic.com/media/60993c_fa1ebcd39c914ec39f1cfc7efee84f43~mv2.jpg" alt="Project 6">
+      <div class="qpage-project-caption">Architectural facade finishing with travertine</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',6)">
+      <img src="https://static.wixstatic.com/media/60993c_b31c21c678994be891e8eb20191feebf~mv2.jpeg" alt="Project 7">
+      <div class="qpage-project-caption">Decorative elements made from our travertine</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',7)">
+      <img src="https://static.wixstatic.com/media/60993c_35314c13902a4adfa46366b4e1e1a049~mv2.jpeg" alt="Project 8">
+      <div class="qpage-project-caption">Facade cladding and architectural decor made of travertine</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',8)">
+      <img src="https://static.wixstatic.com/media/60993c_e843889b5d7c4927b588293b87872302~mv2.jpeg" alt="Project 9">
+      <div class="qpage-project-caption">Combined façade finishing with travertine and granite</div>
+    </div>
+    <div class="qpage-project-card" onclick="openLightboxFor('projects',9)">
+      <img src="https://static.wixstatic.com/media/60993c_92c486659e1b4bb8b79ec02c683b9dd8~mv2.jpeg" alt="Project 10">
+      <div class="qpage-project-caption">Architectural finishing of the entrance area and facade with travertine</div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo"><img src="https://static.wixstatic.com/media/60993c_27ab38b3002c40b999496309449529ba~mv2.png" alt="logo"></div>
+    <p class="footer-copy">© 2026 Kaz-Travertine LLP · Republic of Kazakhstan</p>
+  </footer>
+</div><!-- /projects-page -->
+
+<script>
+const translations = {
+  en: {
+    hero_title: "Kazakh Travertine",
+    hero_tagline: "Living stone,<br>Living architecture",
+    hero_btn: "About the company",
+    about_title: "About Kaz-Travertine LLP",
+    about_p1: "Kaz-Travertine LLP is a Central Asian manufacturing company specializing in the extraction and processing of natural travertine. Combining the region's natural resources, modern technology, and professional expertise, the company produces high-quality natural stone products for architecture and construction.",
+    about_p2: "Kaz-Travertine natural stone is distinguished by its strength, natural expressiveness, and durability, making it widely used in building cladding, architectural elements, and design projects.",
+    about_p3: "The company is focused on developing Kazakhstan's export potential and promoting the region's natural stone on the international market.",
+    quarry_title: "Own quarry",
+    quarry_text: "Kaz-Travertine is developing a natural travertine deposit in Kazakhstan. Mining is taking place at the Degeres-1 and Degeres-3 sites.<br>The deposit's total reserves amount to over 1,300,000 m³ of natural stone, ensuring stable long-term supplies for construction and architectural projects.",
+    quarry_btn: "To the quarry",
+    factory_title: "Own factory",
+    factory_text: "Kaz-Travertine processes natural travertine using modern stone processing equipment.<br>Our production facilities enable us to manufacture blocks, slabs, plates, and facing tiles in various formats for architectural and construction projects.",
+    factory_btn: "To the factory",
+    products_title: "Our products",
+    products_text: "Kaz-Travertine produces natural travertine products for architectural and construction projects.<br>The range includes blocks, slabs and facing tiles in various formats and types of surface treatment.",
+    products_btn: "To our products",
+    projects_title: "Our projects",
+    projects_btn: "Get acquainted",
+    recog_title: "Recognition from industry professionals",
+    recog_p1: "Kaz-Travertine's natural travertine has undergone laboratory testing, confirming its excellent physical and mechanical properties, environmental friendliness, and biological neutrality. The stone is safe for use in construction and architecture and is highly frost-resistant, successfully withstanding freeze-thaw cycles.",
+    recog_p2: "Further confirmation of the quality of our stone is our collaboration with the <strong>Russian stone processing company Kamen Stroy Expert LLC (USSA-gran)</strong>, a manufacturing company specializing in the processing of natural stone and the implementation of architectural projects of varying complexity.",
+    recog_p3: "The company's specialists, who have extensive experience working with natural stone, highly praised Kaz-Travertine travertine, noting its distinctive natural structure, stable physical and mechanical properties, and suitability for use in architectural and construction projects.",
+    recog_right_title: "Natural &amp; Environmentally Safe Stone",
+    recog_right_p1: "Travertine is a natural stone formed through natural geological processes. The material is environmentally friendly, biologically neutral, and safe for humans.",
+    recog_right_p2: "The stone does not emit harmful substances and does not promote the growth of bacteria and fungi, and its porous structure ensures natural micro-ventilation of the surface and helps maintain a favorable microclimate in the premises.",
+    recog_right_p3: "Its environmental safety and durability make travertine a sought-after material in modern architecture and construction.",
+    recog_btn: "Test protocol ›",
+    cert_title: "Certificate",
+    cert_kaz: "Certificate Kaz",
+    cert_ru: "Certificate Ru",
+    team_title: "Our team",
+    contact_title: "Contact Us",
+    contact_phone_label: "Phone",
+    contact_email_label: "Email",
+    contact_addr_label: "Address",
+    contact_addr: "Shymkent, Kazakhstan<br>Kapal Batyra st., 5 km, 94",
+    contact_desc: "Contact us to explore our premium natural stone offerings.",
+    whatsapp_btn: "Write on WhatsApp",
+    founder1_quote: '"Natural stone is the foundation of durable architecture. We strive to unlock the potential of Kazakhstani travertine for contemporary projects."',
+    founder1_name: "Zharas Ertaev",
+    founder1_role: "Founder of Kaz-Travertine LLP",
+    founder2_name: "Bekasyl Tolendiev",
+    founder2_role: "Co-Founder of Kaz-Travertine LLP",
+    team1_name: "Madi Ualikhanov",
+    team1_role: "Company lawyer<br>Kaz-Travertine LLP",
+    team2_name: "Kudaibergen Smailov",
+    team2_role: "Director of Kaz-Travertine LLP",
+    team3_name: "Bakytzhan Berdibekov",
+    team3_role: "Commercial Director of Kaz-Travertine LLP",
+    proj1: "Gallery with columns",
+    proj2: "Travertine staircase",
+    proj3: "Garden border"
+  },
+  ru: {
+    hero_title: "Казахстанский травертин",
+    hero_tagline: "Живой камень,<br>Живая архитектура",
+    hero_btn: "О компании",
+    about_title: "О компании Kaz-Travertine ТОО",
+    about_p1: "ТОО «Каз-Травертин» — центральноазиатская производственная компания, специализирующаяся на добыче и обработке натурального травертина. Сочетая природные ресурсы региона, современные технологии и профессиональный опыт, компания производит высококачественные изделия из натурального камня для архитектуры и строительства.",
+    about_p2: "Натуральный камень «Каз-Травертин» отличается прочностью, естественной выразительностью и долговечностью, что обусловливает его широкое применение в облицовке зданий, архитектурных элементах и дизайнерских проектах.",
+    about_p3: "Компания сосредоточена на развитии экспортного потенциала Казахстана и продвижении природного камня региона на международном рынке.",
+    quarry_title: "Собственный карьер",
+    quarry_text: "Компания «Каз-Травертин» разрабатывает месторождение натурального травертина в Казахстане. Добыча ведётся на участках Дегерес-1 и Дегерес-3.<br>Совокупные запасы месторождения составляют более 1 300 000 м³ природного камня, что обеспечивает стабильные долгосрочные поставки для строительных и архитектурных проектов.",
+    quarry_btn: "В карьер",
+    factory_title: "Собственный завод",
+    factory_text: "Компания Kaz-Travertine обрабатывает натуральный травертин с использованием современного камнеобрабатывающего оборудования.<br>Наши производственные мощности позволяют изготавливать блоки, плиты, бруски и облицовочную плитку различных форматов для архитектурных и строительных проектов.",
+    factory_btn: "На завод",
+    products_title: "Наша продукция",
+    products_text: "Компания Kaz-Travertine производит изделия из натурального травертина для архитектурных и строительных проектов.<br>Ассортимент включает блоки, плиты и облицовочную плитку различных форматов и видов обработки поверхности.",
+    products_btn: "К нашей продукции",
+    projects_title: "Наши проекты",
+    projects_btn: "Познакомиться",
+    recog_title: "Признание со стороны профессионалов отрасли",
+    recog_p1: "Натуральный травертин компании Kaz-Travertine прошёл лабораторные испытания, подтвердившие его превосходные физико-механические свойства, экологичность и биологическую нейтральность. Камень безопасен для использования в строительстве и архитектуре, обладает высокой морозостойкостью и успешно выдерживает циклы замерзания-оттаивания.",
+    recog_p2: "Дополнительным подтверждением качества нашего камня является сотрудничество с <strong>российским предприятием по обработке камня ООО «Камен Строй Эксперт» (USSA-gran)</strong>, специализирующимся на обработке натурального камня и реализации архитектурных проектов различной сложности.",
+    recog_p3: "Специалисты компании, имеющие богатый опыт работы с натуральным камнем, высоко оценили травертин Kaz-Travertine, отметив его самобытную природную структуру, стабильные физико-механические свойства и пригодность для использования в архитектурных и строительных проектах.",
+    recog_right_title: "Натуральный и экологически безопасный камень",
+    recog_right_p1: "Травертин — это природный камень, образованный в результате естественных геологических процессов. Материал экологически чистый, биологически нейтральный и безопасный для человека.",
+    recog_right_p2: "Камень не выделяет вредных веществ и не способствует росту бактерий и грибков, а его пористая структура обеспечивает естественную микровентиляцию поверхности и помогает поддерживать благоприятный микроклимат в помещении.",
+    recog_right_p3: "Благодаря своей экологической безопасности и долговечности травертин является востребованным материалом в современной архитектуре и строительстве.",
+    recog_btn: "Протокол испытаний ›",
+    cert_title: "Сертификат",
+    cert_kaz: "Сертификат каз",
+    cert_ru: "Сертификат рус",
+    team_title: "Наша команда",
+    contact_title: "Свяжитесь с нами",
+    contact_phone_label: "Телефон",
+    contact_email_label: "Email",
+    contact_addr_label: "Адрес",
+    contact_addr: "Шымкент, Казахстан<br>ул. Капал Батыра, 5 км, 94",
+    contact_desc: "Свяжитесь с нами, чтобы ознакомиться с нашим ассортиментом природного камня.",
+    whatsapp_btn: "Написать в WhatsApp",
+    founder1_quote: '«Натуральный камень — основа долговечной архитектуры. Мы стремимся раскрыть потенциал казахстанского травертина в современных проектах».',
+    founder1_name: "Жарас Эртаев",
+    founder1_role: "Основатель ТОО «Каз-Травертин»",
+    founder2_name: "Бекасыл Толендиев",
+    founder2_role: "Соучредитель ТОО «Каз-Травертин»",
+    team1_name: "Мади Уалиханов",
+    team1_role: "Корпоративный юрист<br>ТОО «Каз-Травертин»",
+    team2_name: "Кудайберген Смаилов",
+    team2_role: "Директор ТОО «Каз-Травертин»",
+    team3_name: "Бақытжан Бердибеков",
+    team3_role: "Коммерческий директор ТОО «Каз-Травертин»",
+    proj1: "Галерея с колоннами",
+    proj2: "Лестница из травертина",
+    proj3: "Садовый бордюр"
+  },
+  kk: {
+    hero_title: "Қазақстандық травертин",
+    hero_tagline: "Тірі тас,<br>Тірі сәулет",
+    hero_btn: "Компания туралы",
+    about_title: "Kaz-Travertine ЖШС туралы",
+    about_p1: "«Қаз-Травертин» ЖШС — табиғи травертинді өндіру мен өңдеуге маманданған Орталық Азиялық өндіруші компания. Аймақтың табиғи ресурстарын, заманауи технологиялар мен кәсіби тәжірибені ұштастыра отырып, компания сәулет пен құрылысқа арналған жоғары сапалы табиғи тас бұйымдарын шығарады.",
+    about_p2: "«Қаз-Травертин» табиғи тасы беріктігімен, табиғи эксрессивтілігімен және берік­тілігімен ерекшеленеді, бұл оның ғимараттарды қаптауда, сәулеттік элементтер мен дизайн жобаларында кеңінен қолданылуын қамтамасыз етеді.",
+    about_p3: "Компания Қазақстанның экспорттық әлеуетін дамытуға және аймақтың табиғи тасын халықаралық нарықта насихаттауға бағытталған.",
+    quarry_title: "Өз карьері",
+    quarry_text: "«Қаз-Травертин» компаниясы Қазақстандағы табиғи травертин кенорнын игеруде. Өндіру Дегерес-1 және Дегерес-3 учаскелерінде жүргізілуде.<br>Кенорынның жалпы қоры 1 300 000 м³-ден астам табиғи тасты құрайды, бұл құрылыс және сәулеттік жобалар үшін тұрақты ұзақ мерзімді жеткізілімдерді қамтамасыз етеді.",
+    quarry_btn: "Карьерге",
+    factory_title: "Өз зауыты",
+    factory_text: "Kaz-Travertine компаниясы заманауи тас өңдеу жабдықтарын пайдалана отырып табиғи травертинді өңдейді.<br>Біздің өндірістік қуаттылықтарымыз сәулеттік және құрылыс жобалары үшін әртүрлі форматтардағы блоктарды, тақталарды, бруктарды және қаптама плиткаларды жасауға мүмкіндік береді.",
+    factory_btn: "Зауытқа",
+    products_title: "Біздің өнімдер",
+    products_text: "Kaz-Travertine компаниясы сәулеттік және құрылыс жобалары үшін табиғи травертиннен жасалған бұйымдар шығарады.<br>Ассортиментке әртүрлі форматтар мен беткі өңдеу түрлеріндегі блоктар, тақталар және қаптама плиткалар кіреді.",
+    products_btn: "Өнімдерімізге",
+    projects_title: "Біздің жобалар",
+    projects_btn: "Танысу",
+    recog_title: "Сала мамандарының мойындауы",
+    recog_p1: "Kaz-Travertine компаниясының табиғи травертині зертханалық сынақтардан өтті, бұл оның тамаша физикалық-механикалық қасиеттерін, экологиялық тазалығы мен биологиялық бейтараптығын растады. Тас құрылыс пен сәулетте пайдалануға қауіпсіз, жоғары аязға төзімді және мұздату-еріту циклдарын сәтті өткереді.",
+    recog_p2: "Біздің тасымыздың сапасының қосымша дәлелі — табиғи тасты өңдеу және әртүрлі күрделіліктегі сәулеттік жобаларды іске асыру саласында маманданған <strong>орыс тас өңдеу кәсіпорны ЖШС «Камен Строй Эксперт» (USSA-gran)</strong> компаниясымен ынтымақтастығымыз.",
+    recog_p3: "Табиғи таспен жұмыс жасауда бай тәжірибесі бар компания мамандары Kaz-Travertine травертинін жоғары бағалап, оның өзіндік табиғи құрылымын, тұрақты физикалық-механикалық қасиеттерін және сәулеттік-құрылыс жобаларында қолдануға жарамдылығын атап өтті.",
+    recog_right_title: "Табиғи және экологиялық қауіпсіз тас",
+    recog_right_p1: "Травертин — табиғи геологиялық процестер нәтижесінде пайда болған табиғи тас. Материал экологиялық таза, биологиялық бейтарап және адамға қауіпсіз.",
+    recog_right_p2: "Тас зиянды заттар шығармайды және бактериялар мен саңырауқұлақтардың өсуіне ықпал етпейді, ал оның кеуекті құрылымы беттің табиғи микровентиляциясын қамтамасыз етеді.",
+    recog_right_p3: "Экологиялық қауіпсіздігі мен берік­тілігінің арқасында травертин заманауи сәулет пен құрылыста сұранысқа ие материал болып табылады.",
+    recog_btn: "Сынақ хаттамасы ›",
+    cert_title: "Сертификат",
+    cert_kaz: "Сертификат қаз",
+    cert_ru: "Сертификат орыс",
+    team_title: "Біздің команда",
+    contact_title: "Бізбен байланысыңыз",
+    contact_phone_label: "Телефон",
+    contact_email_label: "Email",
+    contact_addr_label: "Мекенжай",
+    contact_addr: "Шымкент, Қазақстан<br>Қапал Батыр к-сі, 5 км, 94",
+    contact_desc: "Табиғи тас ұсыныстарымызбен танысу үшін бізбен байланысыңыз.",
+    whatsapp_btn: "WhatsApp-қа жазу",
+    founder1_quote: '«Табиғи тас — берік сәулеттің негізі. Біз қазақстандық травертиннің әлеуетін заманауи жобаларда ашуға тырысамыз».',
+    founder1_name: "Жарас Эртаев",
+    founder1_role: "«Қаз-Травертин» ЖШС негізін қалаушы",
+    founder2_name: "Бекасыл Толендиев",
+    founder2_role: "«Қаз-Травертин» ЖШС бірлескен негізін қалаушы",
+    team1_name: "Мади Уалиханов",
+    team1_role: "Корпоративтік заңгер<br>«Қаз-Травертин» ЖШС",
+    team2_name: "Құдайберген Смайлов",
+    team2_role: "«Қаз-Травертин» ЖШС директоры",
+    team3_name: "Бақытжан Бердібеков",
+    team3_role: "«Қаз-Травертин» ЖШС коммерциялық директоры",
+    proj1: "Бағандары бар галерея",
+    proj2: "Травертин баспалдағы",
+    proj3: "Бақша жиегі"
+  },
+  zh: {
+    hero_title: "哈萨克石灰华",
+    hero_tagline: "生动的石材，<br>生动的建筑",
+    hero_btn: "关于公司",
+    about_title: "关于 Kaz-Travertine 有限公司",
+    about_p1: "Kaz-Travertine 有限公司是一家中亚制造企业，专注于天然石灰华的开采与加工。公司将该地区的自然资源、现代技术和专业经验相结合，为建筑领域生产高品质天然石材产品。",
+    about_p2: "Kaz-Travertine 天然石材以其强度、天然表现力和耐久性著称，广泛应用于建筑外墙装饰、建筑元素和设计项目中。",
+    about_p3: "公司致力于发展哈萨克斯坦的出口潜力，并在国际市场上推广该地区的天然石材。",
+    quarry_title: "自有采石场",
+    quarry_text: "Kaz-Travertine 正在开发哈萨克斯坦的天然石灰华矿床，开采在 Degeres-1 和 Degeres-3 矿区进行。<br>矿床总储量超过 130 万立方米天然石材，可为建筑和建筑项目提供稳定的长期供应。",
+    quarry_btn: "前往采石场",
+    factory_title: "自有工厂",
+    factory_text: "Kaz-Travertine 使用现代石材加工设备对天然石灰华进行加工。<br>我们的生产设施能够制造各种规格的块材、板材和饰面砖，适用于建筑和施工项目。",
+    factory_btn: "前往工厂",
+    products_title: "我们的产品",
+    products_text: "Kaz-Travertine 生产用于建筑和施工项目的天然石灰华产品。<br>产品系列包括各种规格和表面处理类型的块材、板材和饰面砖。",
+    products_btn: "查看产品",
+    projects_title: "我们的项目",
+    projects_btn: "了解更多",
+    recog_title: "行业专业人士的认可",
+    recog_p1: "Kaz-Travertine 的天然石灰华经过实验室检测，证实其具有优异的物理和机械性能、环保性和生物中性。该石材可安全用于建筑和装饰，具有较高的抗冻性，能成功承受冻融循环。",
+    recog_p2: "进一步证明我们石材品质的是与<strong>俄罗斯石材加工企业 Kamen Stroy Expert 有限公司（USSA-gran）</strong>的合作，该公司专注于天然石材加工和各种复杂程度的建筑项目实施。",
+    recog_p3: "公司具有丰富天然石材处理经验的专家高度评价了 Kaz-Travertine 石灰华，指出其独特的天然结构、稳定的物理和机械性能以及在建筑项目中的适用性。",
+    recog_right_title: "天然环保石材",
+    recog_right_p1: "石灰华是通过自然地质过程形成的天然石材，材料环保、生物中性，对人体安全无害。",
+    recog_right_p2: "石材不释放有害物质，不促进细菌和真菌的生长，其多孔结构确保表面自然微通风，有助于保持室内良好的微气候。",
+    recog_right_p3: "凭借其环保安全性和耐久性，石灰华成为现代建筑中广受欢迎的材料。",
+    recog_btn: "检测报告 ›",
+    cert_title: "证书",
+    cert_kaz: "哈萨克语证书",
+    cert_ru: "俄语证书",
+    team_title: "我们的团队",
+    contact_title: "联系我们",
+    contact_phone_label: "电话",
+    contact_email_label: "邮箱",
+    contact_addr_label: "地址",
+    contact_addr: "哈萨克斯坦奇姆肯特<br>Kapal Batyra 街，5 公里，94",
+    contact_desc: "请联系我们，了解我们的优质天然石材产品。",
+    whatsapp_btn: "WhatsApp 联系",
+    founder1_quote: '"天然石材是耐久建筑的基础。我们致力于在当代项目中发挥哈萨克斯坦石灰华的潜力。"',
+    founder1_name: "扎拉斯·叶尔塔耶夫",
+    founder1_role: "Kaz-Travertine 有限公司创始人",
+    founder2_name: "贝卡斯勒·托连季耶夫",
+    founder2_role: "Kaz-Travertine 有限公司联合创始人",
+    team1_name: "马迪·乌阿里汉诺夫",
+    team1_role: "公司法律顾问<br>Kaz-Travertine 有限公司",
+    team2_name: "库代别尔根·斯迈洛夫",
+    team2_role: "Kaz-Travertine 有限公司总监",
+    team3_name: "巴克特扎汗·别尔迪别科夫",
+    team3_role: "Kaz-Travertine 有限公司商务总监",
+    proj1: "柱廊画廊",
+    proj2: "石灰华楼梯",
+    proj3: "花园边界"
+  }
+};
+
+// Map data-i18n keys to elements
+const i18nMap = {
+  hero_title: '[data-i18n="hero_title"]',
+  hero_tagline: '[data-i18n="hero_tagline"]',
+  hero_btn: '[data-i18n="hero_btn"]',
+  about_title: '[data-i18n="about_title"]',
+  about_p1: '[data-i18n="about_p1"]',
+  about_p2: '[data-i18n="about_p2"]',
+  about_p3: '[data-i18n="about_p3"]',
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  if (!t) return;
+
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const langMap = {kk:0, en:1, ru:2, zh:3};
+  document.querySelectorAll('.lang-btn')[langMap[lang]].classList.add('active');
+
+  // Helper to set innerHTML safely
+  function set(selector, key) {
+    const el = document.querySelector(selector);
+    if (el && t[key] !== undefined) el.innerHTML = t[key];
+  }
+
+  // Hero
+  set('[data-i18n="hero_title"]', 'hero_title');
+  set('[data-i18n="hero_tagline"]', 'hero_tagline');
+  set('[data-i18n="hero_btn"]', 'hero_btn');
+
+  // About
+  set('[data-i18n="about_title"]', 'about_title');
+  set('[data-i18n="about_p1"]', 'about_p1');
+  set('[data-i18n="about_p2"]', 'about_p2');
+  set('[data-i18n="about_p3"]', 'about_p3');
+
+  // Founders
+  set('.founder-quote', 'founder1_quote');
+  const founderNames = document.querySelectorAll('.founder-name');
+  const founderRoles = document.querySelectorAll('.founder-role');
+  if (founderNames[0]) founderNames[0].innerHTML = t.founder1_name;
+  if (founderRoles[0]) founderRoles[0].innerHTML = t.founder1_role;
+  if (founderNames[1]) founderNames[1].innerHTML = t.founder2_name;
+  if (founderRoles[1]) founderRoles[1].innerHTML = t.founder2_role;
+
+  // Sections headings
+  const sectionHeadings = document.querySelectorAll('.section-heading');
+  // 0=about(already set), 1=quarry, 2=factory, 3=products, 4=projects, 5=cert, 6=team, 7=contact
+  const headingKeys = ['about_title','quarry_title','factory_title','products_title','projects_title','cert_title','team_title','contact_title'];
+  sectionHeadings.forEach((el, i) => { if (t[headingKeys[i]]) el.innerHTML = t[headingKeys[i]]; });
+
+  // Section texts
+  const imgSectionTexts = document.querySelectorAll('.img-section-text');
+  if (imgSectionTexts[0]) imgSectionTexts[0].innerHTML = t.quarry_text;
+  if (imgSectionTexts[1]) imgSectionTexts[1].innerHTML = t.factory_text;
+  if (imgSectionTexts[2]) imgSectionTexts[2].innerHTML = t.products_text;
+
+  // Section buttons (quarry/factory/products/acquainted)
+  const sectionBtns = document.querySelectorAll('.section-btn');
+  const sectionBtnKeys = ['quarry_btn','factory_btn','products_btn','projects_btn'];
+  sectionBtns.forEach((el, i) => { if (t[sectionBtnKeys[i]]) el.innerHTML = t[sectionBtnKeys[i]]; });
+
+  // Project labels
+  const projLabels = document.querySelectorAll('.project-label');
+  if (projLabels[0]) projLabels[0].innerHTML = t.proj1;
+  if (projLabels[1]) projLabels[1].innerHTML = t.proj2;
+  if (projLabels[2]) projLabels[2].innerHTML = t.proj3;
+
+  // Recognition
+  const recogLeft = document.querySelectorAll('.recognition-left p');
+  if (recogLeft[0]) recogLeft[0].innerHTML = t.recog_p1;
+  if (recogLeft[1]) recogLeft[1].innerHTML = t.recog_p2;
+  if (recogLeft[2]) recogLeft[2].innerHTML = t.recog_p3;
+  const recogTitle = document.querySelector('.recognition-section > h2');
+  if (recogTitle) recogTitle.innerHTML = t.recog_title;
+  const recogRightTitle = document.querySelector('.recognition-right h3');
+  if (recogRightTitle) recogRightTitle.innerHTML = t.recog_right_title;
+  const recogRightP = document.querySelectorAll('.recognition-right p');
+  if (recogRightP[0]) recogRightP[0].innerHTML = t.recog_right_p1;
+  if (recogRightP[1]) recogRightP[1].innerHTML = t.recog_right_p2;
+  if (recogRightP[2]) recogRightP[2].innerHTML = t.recog_right_p3;
+  const recogBtn = document.querySelector('.test-protocol-link');
+  if (recogBtn) { recogBtn.innerHTML = t.recog_btn; recogBtn.href = 'Сертификат_Москва.pdf'; }
+
+  // Cert labels
+  const certLabels = document.querySelectorAll('.cert-doc-label');
+  if (certLabels[0]) certLabels[0].innerHTML = t.cert_kaz;
+  if (certLabels[1]) certLabels[1].innerHTML = t.cert_ru;
+
+  // Team
+  const teamNames = document.querySelectorAll('.team-name');
+  const teamRoles = document.querySelectorAll('.team-role');
+  if (teamNames[0]) teamNames[0].innerHTML = t.team1_name;
+  if (teamRoles[0]) teamRoles[0].innerHTML = t.team1_role;
+  if (teamNames[1]) teamNames[1].innerHTML = t.team2_name;
+  if (teamRoles[1]) teamRoles[1].innerHTML = t.team2_role;
+  if (teamNames[2]) teamNames[2].innerHTML = t.team3_name;
+  if (teamRoles[2]) teamRoles[2].innerHTML = t.team3_role;
+
+  // Contact
+  const contactLabels = document.querySelectorAll('.contact-item-label');
+  if (contactLabels[0]) contactLabels[0].innerHTML = t.contact_phone_label;
+  if (contactLabels[1]) contactLabels[1].innerHTML = t.contact_email_label;
+  if (contactLabels[2]) contactLabels[2].innerHTML = t.contact_addr_label;
+  const contactAddr = document.querySelectorAll('.contact-item-value');
+  if (contactAddr[2]) contactAddr[2].innerHTML = t.contact_addr;
+  const contactDesc = document.querySelector('.contact-section .section-text');
+  if (contactDesc) contactDesc.innerHTML = t.contact_desc;
+  const waBtn = document.querySelector('.whatsapp-btn');
+  if (waBtn) waBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> ' + t.whatsapp_btn;
+}
+
+// ─── PAGE NAVIGATION ───
+function openSubPage(pageId) {
+  document.getElementById('main-site').classList.add('hidden');
+  ['quarry-page','factory-page','products-page','projects-page'].forEach(id => {
+    document.getElementById(id).classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function closeSubPage(pageId, e) {
+  if (e) e.preventDefault();
+  document.getElementById(pageId).classList.remove('active');
+  document.getElementById('main-site').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function openQuarryPage(e)   { e.preventDefault(); openSubPage('quarry-page'); }
+function openFactoryPage(e)  { e.preventDefault(); openSubPage('factory-page'); }
+function openProductsPage(e) { e.preventDefault(); openSubPage('products-page'); }
+function openProjectsPage(e) { e.preventDefault(); openSubPage('projects-page'); }
+
+// ─── LIGHTBOX (universal — works for all pages) ───
+const galleryPhotos = {
+  quarry: [
+    'https://static.wixstatic.com/media/60993c_44d064c63c574f65831c9d1fd8fa83c8~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_f650ff472b7b44dea19184bd8e8c6a3e~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_e93be05ffe334a3b967469430441d130~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_e5a57ad2631643588b30c75ddebae2fc~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_39c606b75a484a03a3e70cc96968eb74~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_86d9d4d3b8be439b848e1ba11e255b6f~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_2e74310a42604dc2ab3e3e50305871d2~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_c37ac8a0ca8f4e48891935e6d4d5f56e~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_64833af7396e459ba87f56bb3b8b89bb~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_a299308babc04bb9a87971e492296d17~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_804b6ac7eddc42ad939cfc02845ee1c0~mv2.jpeg'
+  ],
+  factory: [
+    'https://static.wixstatic.com/media/60993c_70dd3a9e80a14ae4a72fea000cebf707~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_4e110c862f624b6f87b57959a3994716~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_de3d96f2816f4e00b78bb5ddf5db97c1~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_4b9c560a16aa4491aee2d47238613d15~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_e3e2b754f3d64d29b66897c26100bf98~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_84ae56f15c73408b9ce014f14d44487b~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_e000d7f04e434b7cafddfb9072f21c9d~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_6163dedae7134072b1411f60cd7497c7~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_7ea3f0b0526843f9a5677dfb789045f4~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_dd6163d74364451ba343173271d2994a~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_b009056a6d0d420887341f772fd44cd5~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_d8c6983d48be4a40af8be35d17cd1dd2~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_ecad21fc4dcd4e5288cf7003296c3b60~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_19288ea9c4e749d7b077233185714836~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_b7c70551f55f4064b7fb582d1bcf4c5e~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_e3da9f8d3ab04ae7b1c3fe68e93834c2~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_f0ec73a94eac4441828c094dcb89bfd0~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_3bc739c2c8f34575957d592d9a44504f~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_bffcf2a5327549d4a48763a4343be829~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_1c901c66b15d43c8b863d92642899e4b~mv2.jpeg'
+  ],
+  products: [
+    'https://static.wixstatic.com/media/60993c_84ea31498fd7445b89e29934d6882dbd~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_0ea4ddc72fad43099e8d6dd4e81ede51~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_a6739702e9a14ff59d93f43da778a360~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_ec2f8305660141ff96b1e5f64e13da5f~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_6881f66ae21d470f91f19c961792a9b8~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_a213ac286d874fbd83edb207327387aa~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_67597253033c42818873c19908f6839b~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_1e4cfb18f82c48cba05ea01323afe248~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_f247c358a4bc4895bbceef20ea362c67~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_f03904f94a9c467fb93cf5c46f710053~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_258e12a3c84d4f80bfd7fcb8080dd899~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_f7240a06a74e4812bfb5e79477ceb262~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_332311f079124bf0b06cb49bffce3462~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_4a9413067200460ea593fc586066c85f~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_10794b21b1d041de8340a5d8551f304f~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_e17bc9621aa44cffae3e3528098307cf~mv2.jpeg'
+  ],
+  projects: [
+    'https://static.wixstatic.com/media/60993c_793e6e5a1c274b3598ea6449dc5deadd~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_659fb83489a14761b82a8416030e824c~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_7e11180ca19348589d8c5fd57dac6e5c~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_449757667cb5427ca4658d952a24b205~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_7a356b58c37944a1b30be053f91cdbae~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_fa1ebcd39c914ec39f1cfc7efee84f43~mv2.jpg',
+    'https://static.wixstatic.com/media/60993c_b31c21c678994be891e8eb20191feebf~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_35314c13902a4adfa46366b4e1e1a049~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_e843889b5d7c4927b588293b87872302~mv2.jpeg',
+    'https://static.wixstatic.com/media/60993c_92c486659e1b4bb8b79ec02c683b9dd8~mv2.jpeg'
+  ]
+};
+
+let currentGallery = 'quarry';
+let currentPhoto = 0;
+
+function openLightbox(index) { openLightboxFor('quarry', index); }
+
+function openLightboxFor(gallery, index) {
+  currentGallery = gallery;
+  currentPhoto = index;
+  const photos = galleryPhotos[gallery];
+  document.getElementById('lightboxImg').src = photos[index];
+  document.getElementById('lightboxCounter').textContent = (index + 1) + ' / ' + photos.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOnBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function lightboxNav(dir) {
+  const photos = galleryPhotos[currentGallery];
+  currentPhoto = (currentPhoto + dir + photos.length) % photos.length;
+  document.getElementById('lightboxImg').src = photos[currentPhoto];
+  document.getElementById('lightboxCounter').textContent = (currentPhoto + 1) + ' / ' + photos.length;
+}
+
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
 </body>
 </html>
